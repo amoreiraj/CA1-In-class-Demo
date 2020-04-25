@@ -2,7 +2,7 @@
   "name": "api-a",
   "version": "1.0.0",
   "description": "CA1 in-class demo",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
@@ -25,5 +25,8 @@
     "http": "0.0.1-security",
     "mongoose": "^5.9.10",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
   }
 }
