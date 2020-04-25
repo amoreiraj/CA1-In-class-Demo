@@ -1,31 +1,68 @@
-var logger = require("morgan"),
-cors = require("cors"),
-http = require("http"),
-express = require("express"),
-bodyParser = require("body-parser"),
-mongoose = require('mongoose');
+//var logger = require("morgan"),
+//http = require("http"),
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+// mongoose = require('mongoose');
+//require('dotenv').config();
 
-var app = express();
-var port = 3000;
-var userCtrl = require('./user-controller');
+//server.js
+const app = express();
+//app.use(server.js);
 
+var corsOptions = {
+    origin: "http://localhost:3000"
+};
 
-app.use(logger('dev'));
+//var port = process.env.PORT || 3000;
+//var userCtrl = require('./user-controller');
+
+app.use(cors(corsOptions));
+
+// parse requests of content-type - application/json
 app.use(bodyParser.json());
-app.use(require("./routes"));
 
-app.get('/users', userCtrl.createUser);
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
-app.listen(port, function(err){
-    console.log("Listening on Port: " + port)
+// app.use(logger('dev'));
+// app.use(bodyParser.json());
+// app.use(require('./routes'));
+
+// app.post('/users', userCtrl.createUser);
+// app.get('/users', userCtrl.getUsers);
+// app.get('/users/:id', userCtrl.getUser);
+// app.delete('/users/:id', userCtrl.deleteUser);
+// app.put('/users/:id', userCtrl.updateUser);
+
+
+//conecting mongoose
+const db = require("./app/models");
+db.mongoose
+.connect(db.url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
 });
 
-mongoose.connect('mongodb://localhost/test');
-mongoose.connection.on('error', (err) => { 
+db.mongoose.connection.on('error', (err) => { 
     console.log('Mongodb Error: ', err); 
     process.exit();
 });
-mongoose.connection.on('connected', () => { 
+db.mongoose.connection.on('connected', () => { 
     console.log('MongoDB is successfully connected');
+});
+
+//simple route
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome here." });
+});
+
+require("./app/routes/coquitalbar.routes")(app);
+
+// set port, listen for requests
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
 });
