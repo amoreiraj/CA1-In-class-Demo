@@ -27,12 +27,13 @@ db.mongoose
     useCreateIndex: true
 })
 
-db.mongoose.connection.on('error', (err) => { 
+.then('connected', () => { 
+    console.log('MongoDB is successfully connected');
+})
+
+.catch('error', (err) => { 
     console.log('Mongodb Error: ', err); 
     process.exit();
-})
-db.mongoose.connection.on('connected', () => { 
-    console.log('MongoDB is successfully connected');
 });
 
 
@@ -42,3 +43,9 @@ app.get("/", (req, res) => {
 });
 
 require("./app/routes/coquitalbar.routes")(app);
+
+// set port, listen for requests
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});
