@@ -6,10 +6,11 @@ const path = require('path');
 mongoose = require('mongoose');
 require('dotenv').config();
 const app = express();
+
 let server = http.createServer(app);
 
-let corsOptions = {
-    origin: "http://localhost:3000"
+var corsOptions = {
+    origin: "http://localhost:3001"
 };
 
 app.use(cors(corsOptions));
@@ -44,10 +45,10 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome here." });
 });
 
-// require("./app/routes/coquitalbar.routes")(app);
+require("./app/routes/coquitalbar.routes")(app);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
