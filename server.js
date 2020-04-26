@@ -1,12 +1,14 @@
 const express = require("express");//Create the app with express
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const http = require("http");
+const path = require('path');
 mongoose = require('mongoose');
 require('dotenv').config();
-
 const app = express();
+let server = http.createServer(app);
 
-var corsOptions = {
+let corsOptions = {
     origin: "http://localhost:3000"
 };
 
@@ -42,7 +44,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome here." });
 });
 
-require("./app/routes/coquitalbar.routes")(app);
+// require("./app/routes/coquitalbar.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;

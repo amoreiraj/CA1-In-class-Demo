@@ -6,15 +6,15 @@ const Coquitalbar = db.coquitalbars;
 
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.title) {
+  if (!req.body.item) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
 
   // Create a Coquital
   const coquitalbar = new Coquitalbar({
-    title: req.body.title,
-    description: req.body.description,
+    item: req.body.item,
+    price: req.body.price,
     published: req.body.published ? req.body.published : false
   });
 
@@ -34,8 +34,8 @@ exports.create = (req, res) => {
 
 // Retrieve all Coquitais from the database.
 exports.findAll = (req, res) => {
-const title = req.query.title;
-  var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
+const item = req.query.item;
+  var condition = item ? { item: { $regex: new RegExp(item), $options: "i" } } : {};
 
   Coquitalbar.find(condition)
     .then(data => {

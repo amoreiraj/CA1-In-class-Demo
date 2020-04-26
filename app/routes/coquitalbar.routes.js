@@ -1,5 +1,5 @@
 module.exports = app => {
-  const coquitalbars = require("../controllers/coquitalbar.controller.js");
+  const coquitalbars = require("../controllers/coquitalbar.controller");
 
   var router = require("express").Router();
 

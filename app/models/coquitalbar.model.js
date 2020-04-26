@@ -1,20 +1,18 @@
+/**
+ * file that defines the schema for mongoose
+ */
 module.exports = mongoose => {
-  var schema = mongoose.Schema(
-      {
-        title: String,
-        description: String,
-        published: Boolean
-      },
-      { timestamps: true }
-    
-  );
-
-schema.method("toJSON", function() {
-    const { __v, _id, ...object } = this.toObject();
-    object.id = _id;
-    return object;
-  });
-
-const Coquitalbar = mongoose.model("coquitalbar", schema);
-  return Coquitalbar;
-};
+    const coquitalbar = mongoose.model(
+        "coquitalbar",
+        mongoose.Schema(
+            {
+                item: String,
+                price: String,
+                published: Boolean
+        },
+        { timestamps: true }
+      )
+    );
+  
+    return coquitalbar;
+  };
