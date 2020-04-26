@@ -1,6 +1,6 @@
 const db = require("../models");
+//Controller import model Coquitalbar
 const Coquitalbar = db.coquitalbars;
-
 
 //Create and Save a new Coquital:
 
@@ -12,44 +12,44 @@ exports.create = (req, res) => {
   }
 
   // Create a Coquital
-  const Coquitalbar = new Coquitalbar({
+  const coquitalbar = new Coquitalbar({
     title: req.body.title,
     description: req.body.description,
     published: req.body.published ? req.body.published : false
   });
 
   // Save Coqquital in the database
-  Coquitalbar
-    .save(Coquitalbar)
+  coquitalbar
+    .save(coquitalbar)
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Tutorial."
+          err.message || "Some error occurred while creating the Coquitalbar."
       });
     });
 };
 
-
 // Retrieve all Coquitais from the database.
+exports.findAll = (req, res) => {
 const title = req.query.title;
   var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
 
-  Tutorial.find(condition)
+  Coquitalbar.find(condition)
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving tutorials."
+          err.message || "Some error occurred while retrieving coquitalbars."
       });
     });
-
-    //Find a single Coquital with an id:
-
+};
+    
+//Find a single Coquital with an id:
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
@@ -67,7 +67,6 @@ exports.findOne = (req, res) => {
 };
 
 //Update a Coquital identified by the id in the request:
-
 exports.update = (req, res) => {
   if (!req.body) {
     return res.status(400).send({
@@ -93,11 +92,10 @@ exports.update = (req, res) => {
 };
 
 //Delete a Coquital with the specified id:
-
 exports.delete = (req, res) => {
   const id = req.params.id;
 
-  Coquitalbar.findByIdAndRemove(id)
+  Coquitalbar.findByIdAndRemove(id, {useFindAndModify: false})
     .then(data => {
       if (!data) {
         res.status(404).send({
@@ -117,7 +115,6 @@ exports.delete = (req, res) => {
 };
 
 //Delete all Coquitais from the database:
-
 exports.deleteAll = (req, res) => {
   Coquitalbar.deleteMany({})
     .then(data => {

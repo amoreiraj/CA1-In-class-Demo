@@ -1,14 +1,12 @@
 module.exports = mongoose => {
-  const Coquitalbar = mongoose.model(
-    "coquitalbar",
-    mongoose.Schema(
+  var schema = mongoose.Schema(
       {
         title: String,
         description: String,
         published: Boolean
       },
       { timestamps: true }
-    )
+    
   );
 
 schema.method("toJSON", function() {
@@ -17,6 +15,6 @@ schema.method("toJSON", function() {
     return object;
   });
 
-  const Coquitalbar = mongoose.model("coquitalbar", schema);
+const Coquitalbar = mongoose.model("coquitalbar", schema);
   return Coquitalbar;
 };
