@@ -26,5 +26,5 @@ module.exports = app => {
 
 module.exports = router;
 
-  app.use('coquital', router);
+  app.use('/api/coquital', router);
 };
