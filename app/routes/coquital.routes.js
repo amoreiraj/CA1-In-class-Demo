@@ -1,13 +1,13 @@
 module.exports = app => {
   const coquital= require("../controllers/coquital.controller");
 
-  let router = require("express").Router();
+router = require("express").Router();
 
   // Create a new Coquital
   router.post("/", coquital.create);
 
 //   // Retrieve all Coquital
-//   router.get("/", coquitalbar.findAll);
+ router.get("/test", coquital.findAll);
 
 //   // Retrieve all published Coquitais
 //   router.get("/published", coquitalbar.findAllPublished);

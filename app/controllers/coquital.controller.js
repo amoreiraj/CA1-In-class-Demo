@@ -4,7 +4,19 @@ const Coquital = db.coquital;
 
 //Create and Save a new Coquital:
 
+exports.findAll = function (req, res) {
+   Coquital.find({}, function (err, coquitals) {
+        if (err) {
+           
+            res.status(400).json(err);
+        }    
+        res.send(coquitals)
+    });
+   
+}
+
 exports.create = (req, res) => {
+    console.log('testing')
   // Validate request
   if (!req.body.item) {
     res.status(400).send({ message: "Content can not be empty!" });

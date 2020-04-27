@@ -17,7 +17,7 @@ let corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
-
+coquital= require("./app/controllers/coquital.controller");
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 
@@ -42,13 +42,14 @@ db.mongoose
     process.exit();
 });
 
-
+app.get("/", coquital.findAll);
+app.post("/", coquital.create);
+app.delete("/:id", coquital.delete);
+app.put("/:id", coquital.update);
 //simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome here." });
-});
 
-// require("./app/routes/coquital.routes")(app);
+
+//require("./app/routes/coquital.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
