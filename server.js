@@ -1,16 +1,17 @@
 const express = require("express");//Create the app with express
-const bodyParser = require("body-parser");
-const cors = require("cors");
+const bodyParser = require("body-parser");//create the req. bogy object
+const cors = require("cors");//enable cors (express Middleware)
 const http = require("http");
 const path = require('path');
-mongoose = require('mongoose');
 require('dotenv').config();
 const app = express();
+let server = http.createServer(app);//create server app
 
-let server = http.createServer(app);
 
-var corsOptions = {
-    origin: "http://localhost:3001"
+// const mongoose = require('mongoose');
+
+let corsOptions = {
+    origin: "http://localhost:3000"
 };
 
 app.use(cors(corsOptions));
@@ -41,14 +42,14 @@ db.mongoose
 
 
 //simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome here." });
-});
+// app.get("/", (req, res) => {
+//   res.json({ message: "Welcome to this CCT COLLEGE Assignmet." });
+// });
 
-require("./app/routes/coquitalbar.routes")(app);
+require("./app/routes/coquitalbar.routes.js")(app);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

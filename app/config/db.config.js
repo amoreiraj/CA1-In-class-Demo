@@ -1,5 +1,5 @@
 // Config/database.js
 module.exports ={
-    url: "MONGODBURL"
+    url: "MONGODB_URL"
 };
 

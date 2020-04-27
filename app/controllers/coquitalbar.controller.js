@@ -12,7 +12,7 @@ exports.create = (req, res) => {
   }
 
   // Create a Coquital
-  const coquitalbar = new Coquitalbar({
+  const coquitalbar = new coquitalbar({
     item: req.body.item,
     price: req.body.price,
     published: req.body.published ? req.body.published : false
@@ -32,70 +32,68 @@ exports.create = (req, res) => {
     });
 };
 
-// Retrieve all Coquitais from the database.
-exports.findAll = (req, res) => {
-const item = req.query.item;
-  var condition = item ? { item: { $regex: new RegExp(item), $options: "i" } } : {};
+// // Retrieve all Coquitais from the database.
+// exports.findAll = (req, res) => {
+// const item = req.query.item;
+//   let condition = item ? { item: { $regex: new RegExp(item), $options: "i" } } : {};
 
-  Coquitalbar.find(condition)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving coquitalbars."
-      });
-    });
-};
+//   coquitalbar.find(condition)
+//     .then(data => {
+//       res.send(data);
+//     })
+//     .catch(err => {
+//       res.status(500).send({
+//         message:
+//           err.message || "Some error occurred while retrieving coquitalbars."
+//       });
+//     });
+// };
     
-//Find a single Coquital with an id:
-exports.findOne = (req, res) => {
-  const id = req.params.id;
+// //Find a single Coquital with an id:
+// exports.findOne = (req, res) => {
+//   const id = req.params.id;
 
-  Coquitalbar.findById(id)
-    .then(data => {
-      if (!data)
-        res.status(404).send({ message: "Not found Coquital with id " + id });
-      else res.send(data);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .send({ message: "Error retrieving Coquital with id=" + id });
-    });
-};
+//   coquitalbar.findById(id)
+//     .then(data => {
+//       if (!data)
+//         res.status(404).send({ message: "Not found Coquital with id " + id });
+//       else res.send(data);
+//     })
+//     .catch(err => {
+//       res
+//         .status(500)
+//         .send({ message: "Error retrieving Coquital with id=" + id });
+//     });
+// };
 
-//Update a Coquital identified by the id in the request:
-exports.update = (req, res) => {
-  if (!req.body) {
-    return res.status(400).send({
-      message: "Data to update can not be empty!"
-    });
-  }
+// //Update a Coquital identified by the id in the request:
+// exports.update = (req, res) => {
+//     const id = req.params.id
+//   if (!req.body) {
+//     return res.status(400).send({
+//       message: "Data to update can not be empty!"
+//     });
+//   }
 
-  const id = req.params.id;
-
-  Coquitalbar.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
-    .then(data => {
-      if (!data) {
-        res.status(404).send({
-          message: `Cannot update Coquital with id=${id}. Maybe Coquital was not found!`
-        });
-      } else res.send({ message: "Coquital was updated successfully." });
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "Error updating Coquital with id=" + id
-      });
-    });
-};
+//   coquitalbar.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+//     .then(data => {
+//       if (!data) {
+//         res.status(404).send({
+//           message: `Cannot update Coquital with id=${id}. Maybe Coquital was not found!`
+//         });
+//       } else res.send({ message: "Coquital was updated successfully." });
+//     })
+//     .catch(err => {
+//       res.status(500).send({
+//         message: "Error updating Coquital with id=" + id
+//       });
+//     });
+// };
 
 //Delete a Coquital with the specified id:
 exports.delete = (req, res) => {
   const id = req.params.id;
-
-  Coquitalbar.findByIdAndRemove(id, {useFindAndModify: false})
+  coquitalbar.findByIdAndRemove(id)
     .then(data => {
       if (!data) {
         res.status(404).send({
@@ -114,33 +112,33 @@ exports.delete = (req, res) => {
     });
 };
 
-//Delete all Coquitais from the database:
-exports.deleteAll = (req, res) => {
-  Coquitalbar.deleteMany({})
-    .then(data => {
-      res.send({
-        message: `${data.deletedCount} Coquitais were deleted successfully!`
-      });
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while removing all coquitais."
-      });
-    });
-};
+// //Delete all Coquitais from the database:
+// exports.deleteAll = (req, res) => {
+//   coquitalbar.deleteMany({})
+//     .then(data => {
+//       res.send({
+//         message: `${data.deletedCount} Coquitais were deleted successfully!`
+//       });
+//     })
+//     .catch(err => {
+//       res.status(500).send({
+//         message:
+//           err.message || "Some error occurred while removing all coquitais."
+//       });
+//     });
+// };
 
-//Find all Coquitais with published = true:
+// //Find all Coquitais with published = true:
 
-exports.findAllPublished = (req, res) => {
-  Coquitalbar.find({ published: true })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving coquitais."
-      });
-    });
-};
+// exports.findAllPublished = (req, res) => {
+//   Coquitalbar.find({ published: true })
+//     .then(data => {
+//       res.send(data);
+//     })
+//     .catch(err => {
+//       res.status(500).send({
+//         message:
+//           err.message || "Some error occurred while retrieving coquitais."
+//       });
+//     });
+// };
