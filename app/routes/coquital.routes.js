@@ -1,10 +1,10 @@
 module.exports = app => {
-  const coquitalbar = require("../controllers/coquitalbar.controller");
+  const coquital= require("../controllers/coquital.controller");
 
   let router = require("express").Router();
 
   // Create a new Coquital
-  router.post("/", coquitalbar.create);
+  router.post("/", coquital.create);
 
 //   // Retrieve all Coquital
 //   router.get("/", coquitalbar.findAll);
@@ -13,16 +13,18 @@ module.exports = app => {
 //   router.get("/published", coquitalbar.findAllPublished);
 
   // Retrieve a single Coquital by id
-  router.get("/:id", coquitalbar.findOne);
+  router.get("/:id", coquital.findOne);
 
   // Update a Coquital with id
-  router.put("/:id", coquitalbar.update);
+  router.put("/:id", coquital.update);
 
   // Delete a Coquital with id
-  router.delete("/:id", coquitalbar.delete);
+  router.delete("/:id", coquital.delete);
 
 //   // Create a new Coquital
 //   router.delete("/", coquitalbar.deleteAll);
 
-  app.use('/api/coquitalbar', router);
+module.exports = router;
+
+  app.use('coquital', router);
 };

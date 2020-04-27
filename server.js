@@ -1,18 +1,22 @@
 const express = require("express");//Create the app with express
+const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const http = require("http");
 const path = require('path');
 mongoose = require('mongoose');
 require('dotenv').config();
-const app = express();
+expAutoSan = require('express-autosanitizer');
+
+
 let server = http.createServer(app);
 
 let corsOptions = {
-    origin: "http://localhost:8000"
+    origin: "http://localhost:3000"
 };
 
 app.use(cors(corsOptions));
+app.use(express.json());
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
@@ -47,7 +51,7 @@ app.get("/", (req, res) => {
 // require("./app/routes/coquital.routes")(app);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8001;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

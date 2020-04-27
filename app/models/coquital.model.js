@@ -2,8 +2,8 @@
  * file that defines the schema for mongoose
  */
 module.exports = mongoose => {
-    const coquitalbar = mongoose.model(
-        "coquitalbar",
+    const coquital = mongoose.model(
+        "coquital",
         mongoose.Schema(
             {
                 item: String,
@@ -14,5 +14,5 @@ module.exports = mongoose => {
       )
     );
   
-    return coquitalbar;
+    return coquital;
   };

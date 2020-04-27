@@ -29,6 +29,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-autosanitizer": "^1.0.1",
     "heroku": "^7.39.5",
     "http": "0.0.1-security",
     "mongo": "^0.1.0",
